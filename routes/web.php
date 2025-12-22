@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Dashboard\IndexController;
+use App\Http\Controllers\Dashboard\LogoutController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -14,6 +15,7 @@ Route::post('/login', [LoginController::class, 'post'])->name('login.post');
 // auth: jika belum login maka otomatis laravel mencari route dengna name = login
 Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::get('/', IndexController::class)->name('dashboard.index');
+    Route::get('/logout', LogoutController::class)->name('dashboard.logout');
     // Route::get('/users', IndexController::class)->name('dashboard.index');
     // Route::get('/sales', IndexController::class)->name('dashboard.index');
 }); // https://laravel.com/docs/12.x/middleware
