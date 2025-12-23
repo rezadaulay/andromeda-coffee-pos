@@ -15,7 +15,8 @@ class ProductCategoryController extends Controller
      */
     public function index()
     {
-        return view('dashboard.product-category.index'); 
+        $categories = ProductCategory::paginate(5); // 10 item per halaman
+        return view('dashboard.product-category.index', compact('categories'));
     }
 
     /**
@@ -41,9 +42,7 @@ class ProductCategoryController extends Controller
         return back()->with('success', 'Kategori berhasil ditambahkan');
     }
 
-    /**
-     * Display the specified resource.
-     */
+   
     public function show(string $id)
     {
         //

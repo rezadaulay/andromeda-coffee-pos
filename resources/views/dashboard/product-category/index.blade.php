@@ -27,9 +27,11 @@
             </thead>
 
             <tbody>
+                
+                @foreach($categories as $category)
                 <tr class="hover:bg-gray-50">
                     <td class="px-4 py-2 border">
-                        Minuman
+                        {{$category->name}}
                     </td>
                     <td class="px-4 py-2 border text-center space-x-2">
                         <a
@@ -40,8 +42,14 @@
                         </a>
                     </td>
                 </tr>
+                @endforeach
             </tbody>
         </table>
+
+        {{-- Pagination --}}
+        <div class="mt-4">
+            {{ $categories->links() }}
+        </div>
     </div>
 
 </div>
