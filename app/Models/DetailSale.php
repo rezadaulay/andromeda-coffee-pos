@@ -30,9 +30,9 @@ class DetailSale extends Model
         return [
             'sale_id' => 'integer',
             'product_id' => 'integer',
-            'quantity' => 'float',
-            'price' => 'float',
-            'subtotal' => 'float',
+            'quantity' => 'integer',
+            'price' => 'decimal(10.2)',
+            'subtotal' => 'decimal:10,2',
         ];
     }
 }

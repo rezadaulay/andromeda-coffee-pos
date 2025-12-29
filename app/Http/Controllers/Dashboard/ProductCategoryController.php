@@ -15,7 +15,7 @@ class ProductCategoryController extends Controller
      */
     public function index()
     {
-        $categories = ProductCategory::paginate(5); // 10 item per halaman
+        $categories = ProductCategory::paginate(20); // 20 item per halaman
         return view('dashboard.product-category.index', compact('categories'));
     }
 
