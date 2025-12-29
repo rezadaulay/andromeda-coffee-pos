@@ -18,6 +18,13 @@
 
     {{-- Table --}}
     <div class="overflow-x-auto">
+        @if (session('success'))
+            <div class="mb-4 text-sm text-teal-600">{{ session('success') }}</div>
+        @endif
+        @if (session('error'))
+            <div class="mb-4 text-sm text-red-600">{{ session('error') }}</div>
+        @endif
+
         <table class="min-w-full border border-gray-200">
             <thead class="bg-gray-50">
                 <tr>
@@ -27,7 +34,6 @@
             </thead>
 
             <tbody>
-                
                 @foreach($categories as $category)
                 <tr class="hover:bg-gray-50">
                     <td class="px-4 py-2 border">

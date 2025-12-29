@@ -53,7 +53,8 @@ class ProductCategoryController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $category = ProductCategory::findOrFail($id);
+        return view('dashboard.product-category.edit', compact('category'));
     }
 
     /**
@@ -61,7 +62,16 @@ class ProductCategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+
+        $category = ProductCategory::findOrFail($id);
+        $category->update([
+            'name' => $request->name,
+        ]);
+
+        return redirect()->route('product-categories.index')->with('success', 'Kategori berhasil diperbarui');
     }
 
     /**
@@ -69,6 +79,6 @@ class ProductCategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        return redirect()->route('product-categories.index')->with('error', 'Fungsi hapus kategori dinonaktifkan sementara');
     }
 }
