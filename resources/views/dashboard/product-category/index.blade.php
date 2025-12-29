@@ -34,20 +34,28 @@
             </thead>
 
             <tbody>
-                @forelse($categories as $category)
-                    <tr class="hover:bg-gray-50">
-                        <td class="px-4 py-2 border">{{ $category->name }}</td>
-                        <td class="px-4 py-2 border text-center space-x-2">
-                            <a href="{{ route('product-categories.edit', $category->id) }}" class="text-teal-600 hover:underline text-sm">Edit</a>
-                        </td>
-                    </tr>
-                @empty
-                    <tr>
-                        <td class="px-4 py-2 border" colspan="2">Belum ada kategori.</td>
-                    </tr>
-                @endforelse
+                @foreach($categories as $category)
+                <tr class="hover:bg-gray-50">
+                    <td class="px-4 py-2 border">
+                        {{$category->name}}
+                    </td>
+                    <td class="px-4 py-2 border text-center space-x-2">
+                        <a
+                            href="#"
+                            class="text-teal-600 hover:underline text-sm"
+                        >
+                            Edit
+                        </a>
+                    </td>
+                </tr>
+                @endforeach
             </tbody>
         </table>
+
+        {{-- Pagination --}}
+        <div class="mt-4">
+            {{ $categories->links() }}
+        </div>
     </div>
 
 </div>

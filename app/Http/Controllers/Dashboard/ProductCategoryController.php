@@ -15,7 +15,7 @@ class ProductCategoryController extends Controller
      */
     public function index()
     {
-        $categories = ProductCategory::orderBy('name')->get();
+        $categories = ProductCategory::paginate(20); // 20 item per halaman
         return view('dashboard.product-category.index', compact('categories'));
     }
 
@@ -42,9 +42,7 @@ class ProductCategoryController extends Controller
         return back()->with('success', 'Kategori berhasil ditambahkan');
     }
 
-    /**
-     * Display the specified resource.
-     */
+   
     public function show(string $id)
     {
         //

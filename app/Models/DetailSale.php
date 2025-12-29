@@ -25,4 +25,14 @@ class DetailSale extends Model
         return $this->belongsTo(Product::class);
     }
     
+    protected function casts(): array
+    {
+        return [
+            'sale_id' => 'integer',
+            'product_id' => 'integer',
+            'quantity' => 'integer',
+            'price' => 'decimal:2',
+            'subtotal' => 'decimal:2',
+        ];
+    }
 }

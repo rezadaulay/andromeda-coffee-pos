@@ -19,9 +19,11 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::get('/logout', LogoutController::class)->name('dashboard.logout');
     
     Route::resource('product-categories', ProductCategoryController::class);
+   
     // Route::get('/users', IndexController::class)->name('dashboard.index');
     // Route::get('/sales', IndexController::class)->name('dashboard.index');
 }); // https://laravel.com/docs/12.x/middleware
+
 
 
 // Route::get('/', function () {

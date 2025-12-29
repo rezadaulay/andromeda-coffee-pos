@@ -23,4 +23,12 @@ class Product extends Model
     {
         return $this->hasMany(DetailSale::class);
     }
+
+    protected function casts(): array
+    {
+        return [
+            'product_category_id' => 'integer',
+            'price' => 'decimal:2',
+        ];
+    }
 }
