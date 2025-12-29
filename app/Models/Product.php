@@ -28,7 +28,7 @@ class Product extends Model
     {
         return [
             'product_category_id' => 'integer',
-            'price' => 'decimal:10,2',
+            'price' => 'decimal:2',
         ];
     }
 }

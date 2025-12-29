@@ -14,8 +14,7 @@ class SaleMonthlyOverview extends Model
     ];
 
     protected $casts = [
-     
-        'sales_summary' => 'decimal:10,2',
+        'sales_summary' => 'decimal:2',
         'total_sales' => 'integer',
     ];
 }

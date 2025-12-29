@@ -32,7 +32,7 @@ class Sale extends Model
         return [
             'user_id' => 'integer',
             'payment_method_id' => 'integer',
-            'total' => 'decimal:10,2',
+            'total' => 'decimal:2',
             'status' => SaleStatus::class,
         ];
     }

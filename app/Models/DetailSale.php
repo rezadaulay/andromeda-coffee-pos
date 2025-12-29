@@ -31,8 +31,8 @@ class DetailSale extends Model
             'sale_id' => 'integer',
             'product_id' => 'integer',
             'quantity' => 'integer',
-            'price' => 'decimal(10.2)',
-            'subtotal' => 'decimal:10,2',
+            'price' => 'decimal:2',
+            'subtotal' => 'decimal:2',
         ];
     }
 }
