@@ -18,6 +18,13 @@
 
     {{-- Table --}}
     <div class="overflow-x-auto">
+        @if (session('success'))
+            <div class="mb-4 text-sm text-teal-600">{{ session('success') }}</div>
+        @endif
+        @if (session('error'))
+            <div class="mb-4 text-sm text-red-600">{{ session('error') }}</div>
+        @endif
+
         <table class="min-w-full border border-gray-200">
             <thead class="bg-gray-50">
                 <tr>
@@ -27,19 +34,18 @@
             </thead>
 
             <tbody>
-                <tr class="hover:bg-gray-50">
-                    <td class="px-4 py-2 border">
-                        Minuman
-                    </td>
-                    <td class="px-4 py-2 border text-center space-x-2">
-                        <a
-                            href="#"
-                            class="text-teal-600 hover:underline text-sm"
-                        >
-                            Edit
-                        </a>
-                    </td>
-                </tr>
+                @forelse($categories as $category)
+                    <tr class="hover:bg-gray-50">
+                        <td class="px-4 py-2 border">{{ $category->name }}</td>
+                        <td class="px-4 py-2 border text-center space-x-2">
+                            <a href="{{ route('product-categories.edit', $category->id) }}" class="text-teal-600 hover:underline text-sm">Edit</a>
+                        </td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td class="px-4 py-2 border" colspan="2">Belum ada kategori.</td>
+                    </tr>
+                @endforelse
             </tbody>
         </table>
     </div>
