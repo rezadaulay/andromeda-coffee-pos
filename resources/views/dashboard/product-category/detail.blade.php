@@ -9,6 +9,12 @@
 				<div class="flex items-center gap-3">
 					<a href="{{ route('product-categories.index') }}" class="text-sm text-gray-600 hover:text-teal-600">&larr; Kembali</a>
 					<a href="#" class="inline-flex items-center px-3 py-1.5 bg-teal-600 text-white text-sm rounded hover:bg-teal-700">Edit</a>
+
+					<form action="{{ route('product-categories.destroy', $category->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus kategori ini?');">
+						@csrf
+						@method('DELETE')
+						<button type="submit" class="inline-flex items-center px-3 py-1.5 bg-red-600 text-white text-sm rounded hover:bg-red-700">Hapus</button>
+					</form>
 				</div>
 			</div>
 			@if(isset($category->created_at))

@@ -40,6 +40,18 @@
                         >
                             Detail
                         </a>
+                        <a
+                            href="#"
+                            class="text-teal-600 hover:underline text-sm"
+                            onclick="event.preventDefault(); if(confirm('Yakin ingin menghapus kategori ini?')){ document.getElementById('delete-category-{{ $category->id }}').submit(); }"
+                        >
+                            Hapus
+                        </a>
+
+                        <form id="delete-category-{{ $category->id }}" action="{{ route('product-categories.destroy', $category->id) }}" method="POST" style="display:none;">
+                            @csrf
+                            @method('DELETE')
+                        </form>
                     </td>
                 </tr>
                 @endforeach
