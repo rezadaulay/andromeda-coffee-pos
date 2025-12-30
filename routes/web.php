@@ -18,6 +18,7 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::get('/', IndexController::class)->name('dashboard.index');
     Route::get('/logout', LogoutController::class)->name('dashboard.logout');
     
+    Route::get('/product-category/detail/{id}', [ProductCategoryController::class, "show"]);
     Route::resource('product-categories', ProductCategoryController::class);
     // Route::get('/users', IndexController::class)->name('dashboard.index');
     // Route::get('/sales', IndexController::class)->name('dashboard.index');

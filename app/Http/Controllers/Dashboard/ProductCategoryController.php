@@ -15,7 +15,8 @@ class ProductCategoryController extends Controller
      */
     public function index()
     {
-        return view('dashboard.product-category.index'); 
+        $categories = ProductCategory::all();
+        return view("dashboard.product-category.index", compact("categories"));
     }
 
     /**
@@ -44,9 +45,10 @@ class ProductCategoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {
-        //
+    public function show(string $id) {
+        $category = ProductCategory::with('products')->findOrFail($id);
+
+        return view("dashboard.product-category.detail", compact('category'));
     }
 
     /**

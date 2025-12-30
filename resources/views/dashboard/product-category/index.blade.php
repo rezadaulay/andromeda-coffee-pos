@@ -27,19 +27,22 @@
             </thead>
 
             <tbody>
+                @foreach($categories as $category)
+
                 <tr class="hover:bg-gray-50">
                     <td class="px-4 py-2 border">
-                        Minuman
+                        {{ $category->name }}
                     </td>
                     <td class="px-4 py-2 border text-center space-x-2">
                         <a
-                            href="#"
+                            href="/dashboard/product-category/detail/{{ $category->id }}"
                             class="text-teal-600 hover:underline text-sm"
                         >
-                            Edit
+                            Detail
                         </a>
                     </td>
                 </tr>
+                @endforeach
             </tbody>
         </table>
     </div>
