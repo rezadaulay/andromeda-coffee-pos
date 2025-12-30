@@ -18,7 +18,6 @@ class ProductCategoryController extends Controller
         $categories = ProductCategory::all();
         return view("dashboard.product-category.index", compact("categories"));
     }
-
     /**
      * Show the form for creating a new resource.
      */
@@ -72,6 +71,8 @@ class ProductCategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        ProductCategory::findOrFail($id)->delete();
+
+        return redirect()->route('product-categories.index')->with('success', 'Kategori berhasil dihapus');
     }
 }
