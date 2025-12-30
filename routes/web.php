@@ -18,6 +18,8 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::get('/', IndexController::class)->name('dashboard.index');
     Route::get('/logout', LogoutController::class)->name('dashboard.logout');
     
+    Route::get('/product-category/detail/{id}', [ProductCategoryController::class, "show"]);
+    Route::get('/product-category/delete/{id}', [ProductCategoryController::class, "destroy"])->name('product-category.delete');
     Route::resource('product-categories', ProductCategoryController::class);
     // Route::get('/users', IndexController::class)->name('dashboard.index');
     // Route::get('/sales', IndexController::class)->name('dashboard.index');

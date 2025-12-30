@@ -27,19 +27,34 @@
             </thead>
 
             <tbody>
+                @foreach($categories as $category)
+
                 <tr class="hover:bg-gray-50">
                     <td class="px-4 py-2 border">
-                        Minuman
+                        {{ $category->name }}
                     </td>
                     <td class="px-4 py-2 border text-center space-x-2">
                         <a
-                            href="#"
+                            href="/dashboard/product-category/detail/{{ $category->id }}"
                             class="text-teal-600 hover:underline text-sm"
                         >
-                            Edit
+                            Detail
                         </a>
+                        <a
+                            href="#"
+                            class="text-teal-600 hover:underline text-sm"
+                            onclick="event.preventDefault(); if(confirm('Yakin ingin menghapus kategori ini?')){ document.getElementById('delete-category-{{ $category->id }}').submit(); }"
+                        >
+                            Hapus
+                        </a>
+
+                        <form id="delete-category-{{ $category->id }}" action="{{ route('product-categories.destroy', $category->id) }}" method="POST" style="display:none;">
+                            @csrf
+                            @method('DELETE')
+                        </form>
                     </td>
                 </tr>
+                @endforeach
             </tbody>
         </table>
     </div>
