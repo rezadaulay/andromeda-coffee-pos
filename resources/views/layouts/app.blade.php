@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Andromeda Coffee</title>
+    <style>
+        body::-webkit-scrollbar{
+            display: none;
+        }
+    </style>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 <body class="min-h-screen bg-gray-100">
@@ -22,7 +27,7 @@
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex space-x-6">
                     <a href="#" class="text-gray-700 hover:text-indigo-600 font-medium">Penjualan</a>
-                    <a href="#" class="text-gray-700 hover:text-indigo-600 font-medium">Produk</a>
+                    <a href="{{ route('product.index')}}" class="text-gray-700 hover:text-indigo-600 font-medium">Produk</a>
                     <a href="{{ route('product-categories.index') }}" class="text-gray-700 hover:text-indigo-600 font-medium">Kategori</a>
                     <a href="#" class="text-gray-700 hover:text-indigo-600 font-medium">User</a>
                     <a href="{{ route('dashboard.logout') }}" class="text-gray-700 hover:text-indigo-600 font-medium">Logout</a>
