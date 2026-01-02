@@ -10,20 +10,15 @@
         <a href="{{ route('products.index') }}" class="text-sm text-teal-600 hover:underline">Kembali</a>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div class="p-4 border rounded">
-            <div class="text-sm text-gray-500">Nama</div>
-            <div class="text-lg font-semibold">{{ $product->name }}</div>
+    <div class="space-y-4">
+        <div class="p-6 border rounded">
+            <div class="text-2xl font-bold">{{ $product->name }}</div>
+            <div class="text-sm text-gray-500 mt-1"> Harga: {{ number_format((float)$product->price, 2, ',', '.') }}</div>
         </div>
 
         <div class="p-4 border rounded">
             <div class="text-sm text-gray-500">Kategori</div>
             <div class="text-lg font-semibold">{{ $product->category?->name ?? '-' }}</div>
-        </div>
-
-        <div class="p-4 border rounded">
-            <div class="text-sm text-gray-500">Harga</div>
-            <div class="text-lg font-semibold">{{ number_format((float)$product->price, 2, ',', '.') }}</div>
         </div>
 
         <div class="p-4 border rounded">
