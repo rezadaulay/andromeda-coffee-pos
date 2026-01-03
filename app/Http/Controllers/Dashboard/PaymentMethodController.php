@@ -22,7 +22,7 @@ class PaymentMethodController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.payment-method.create');
     }
 
     /**
@@ -30,38 +30,12 @@ class PaymentMethodController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        $method = PaymentMethod::findOrFail($id);
-        return view("dashboard.paymentmethod.edit",compact('method'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        $validated = $request->validate([
+        $request->validate([
             'name' => 'required',
             'description' => 'required',
         ]);
 
-        $method = PaymentMethod::findOrFail($id);
-        $method->update([
+        PaymentMethod::create([
             'name' => $request->name,
             'description' => $request->description,
         ]);
@@ -71,17 +45,17 @@ class PaymentMethodController extends Controller
 
     public function delete($id)
     {
-    $method = PaymentMethod::findOrFail($id);
-    return view('dashboard.paymentmethod.delete', compact('method'));
+        $method = PaymentMethod::findOrFail($id);
+        return view('dashboard.paymentmethod.delete', compact('method'));
     }
 
 
     public function destroy(string $id)
     {
         $method = PaymentMethod::findOrFail($id);
-    $method->delete();
+        $method->delete();
 
-    return redirect()->route('paymentmethod.index')
-                     ->with('success', 'Data berhasil dihapus');
+        return redirect()->route('paymentmethod.index')
+                     ->with('success', 'Metode pembayaran berhasil ditambahkan');
     }
 }

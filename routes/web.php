@@ -6,6 +6,7 @@ use App\Http\Controllers\Dashboard\LogoutController;
 use App\Http\Controllers\Dashboard\PaymentMethodController;
 use App\Http\Controllers\Dashboard\ProductCategoryController;
 use App\Http\Controllers\Dashboard\ProductController;
+use App\Http\Controllers\Dashboard\PaymentMethodController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -30,6 +31,9 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     )->name('paymentmethod.delete');
 
     Route::resource('products', ProductController::class);
+    Route::get('/metode-pemabayaran', [PaymentMethodController::class, 'index'])->name('payment-methods.index');
+    Route::get('/metode-pemabayaran/create', [PaymentMethodController::class, 'create'])->name('payment-methods.create');
+    Route::post('/metode-pemabayaran', [PaymentMethodController::class, 'store'])->name('payment-methods.store');
    
 
     // Route::get('/users', IndexController::class)->name('dashboard.index');
