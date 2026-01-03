@@ -21,12 +21,17 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::get('/logout', LogoutController::class)->name('dashboard.logout');
     
     Route::resource('product-categories', ProductCategoryController::class);
+bintang-work
     Route::resource('product', ProductController::class);
     Route::resource('paymentmethod',PaymentMethodController::class);
     Route::get(
     'paymentmethod/{id}/delete',
     [PaymentMethodController::class, 'delete']
     )->name('paymentmethod.delete');
+
+    Route::resource('products', ProductController::class);
+   
+develop
     // Route::get('/users', IndexController::class)->name('dashboard.index');
     // Route::get('/sales', IndexController::class)->name('dashboard.index');
 }); // https://laravel.com/docs/12.x/middleware
