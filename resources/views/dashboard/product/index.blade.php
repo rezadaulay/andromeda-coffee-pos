@@ -56,7 +56,7 @@
                         </a>
                         <a
                             href="{{ route('products.edit', $product->id) }}"
-                            class="text-teal-600 hover:underline text-sm"
+                            class="text-yellow-600 hover:underline text-sm"
                         >
                             Edit
                         </a>
