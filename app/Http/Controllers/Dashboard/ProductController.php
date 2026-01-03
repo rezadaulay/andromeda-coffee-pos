@@ -3,15 +3,14 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
- bintang-work
+
 use Illuminate\Http\Request;
 use App\Models\Product;
 use \App\Models\ProductCategory;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
-use App\Models\Product;
-use Illuminate\Http\Request;
- develop
+
+
 
 class ProductController extends Controller
 {
@@ -21,7 +20,7 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::with('category')->paginate(20);
- bintang-work
+
         return view("dashboard.product.index",compact('products'));
     }
 
@@ -55,7 +54,7 @@ class ProductController extends Controller
        
 
         return view('dashboard.products.index', compact('products'));
-develop
+
     }
 
     /**
@@ -63,7 +62,7 @@ develop
      */
     public function show(string $id)
     {
-bintang-work
+
         //
     }
 
@@ -107,6 +106,6 @@ bintang-work
 
         $product = Product::with('category')->findOrFail($id);
         return view('dashboard.products.show', compact('product'));
-develop
+
     }
 }
