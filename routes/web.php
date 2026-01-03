@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Dashboard\IndexController;
 use App\Http\Controllers\Dashboard\LogoutController;
+use App\Http\Controllers\Dashboard\PaymentMethodController;
 use App\Http\Controllers\Dashboard\ProductCategoryController;
 use App\Http\Controllers\Dashboard\ProductController;
 use App\Http\Controllers\Dashboard\PaymentMethodController;
@@ -21,11 +22,20 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::get('/logout', LogoutController::class)->name('dashboard.logout');
     
     Route::resource('product-categories', ProductCategoryController::class);
+
+    Route::resource('product', ProductController::class);
+    Route::resource('paymentmethod',PaymentMethodController::class);
+    Route::get(
+    'paymentmethod/{id}/delete',
+    [PaymentMethodController::class, 'delete']
+    )->name('paymentmethod.delete');
+
     Route::resource('products', ProductController::class);
     Route::get('/metode-pemabayaran', [PaymentMethodController::class, 'index'])->name('payment-methods.index');
     Route::get('/metode-pemabayaran/create', [PaymentMethodController::class, 'create'])->name('payment-methods.create');
     Route::post('/metode-pemabayaran', [PaymentMethodController::class, 'store'])->name('payment-methods.store');
    
+
     // Route::get('/users', IndexController::class)->name('dashboard.index');
     // Route::get('/sales', IndexController::class)->name('dashboard.index');
 }); // https://laravel.com/docs/12.x/middleware
