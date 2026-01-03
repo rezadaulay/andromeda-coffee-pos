@@ -26,12 +26,8 @@
 
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex space-x-6">
-                    <a href="#" class="text-gray-700 hover:text-indigo-600 font-medium">Penjualan</a>
- bintang-work
-                    <a href="{{ route('product.index')}}" class="text-gray-700 hover:text-indigo-600 font-medium">Produk</a>
-
+                    <a href="#" class="text-gray-700 hover:text-indigo-600 font-medium">Penjualan</a> 
                     <a href="{{ route('products.index') }}" class="text-gray-700 hover:text-indigo-600 font-medium">Produk</a>
-develop
                     <a href="{{ route('product-categories.index') }}" class="text-gray-700 hover:text-indigo-600 font-medium">Kategori</a>
                     <a href="#" class="text-gray-700 hover:text-indigo-600 font-medium">User</a>
                     <a href="{{ route('payment-methods.index') }}" class="text-gray-700 hover:text-indigo-600 font-medium">Metode Pembayaran</a>

@@ -3,7 +3,6 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Dashboard\IndexController;
 use App\Http\Controllers\Dashboard\LogoutController;
-use App\Http\Controllers\Dashboard\PaymentMethodController;
 use App\Http\Controllers\Dashboard\ProductCategoryController;
 use App\Http\Controllers\Dashboard\ProductController;
 use App\Http\Controllers\Dashboard\PaymentMethodController;
@@ -23,7 +22,6 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     
     Route::resource('product-categories', ProductCategoryController::class);
 
-    Route::resource('product', ProductController::class);
     Route::resource('paymentmethod',PaymentMethodController::class);
     Route::get(
     'paymentmethod/{id}/delete',

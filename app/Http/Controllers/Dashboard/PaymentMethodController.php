@@ -43,6 +43,34 @@ class PaymentMethodController extends Controller
         return back()->with('success', 'Metode pembayaran berhasil diperbarui!');
     }
 
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        $method = PaymentMethod::findOrFail($id);
+        return view("dashboard.paymentmethod.edit",compact('method'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        $validated = $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+        ]);
+
+        $method = PaymentMethod::findOrFail($id);
+        $method->update([
+            'name' => $request->name,
+            'description' => $request->description,
+        ]);
+
+        return back()->with('success', 'Metode pembayaran berhasil diperbarui!');
+    }
+
     public function delete($id)
     {
         $method = PaymentMethod::findOrFail($id);

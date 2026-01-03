@@ -94,7 +94,7 @@ class ProductController extends Controller
             'product_category_id' => $request->product_category_id,
         ]);
 
-        return redirect()->route('product.index')->with('success', 'Produk berhasil diupdate');
+        return redirect()->route('products.index')->with('success', 'Produk berhasil diupdate');
     }
 
     /**

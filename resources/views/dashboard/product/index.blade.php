@@ -8,7 +8,7 @@
         <h1 class="text-xl font-bold">Daftar Product</h1>
 
         <a
-            href="{{ route('product.create') }}"
+            href="{{ route('products.create') }}"
             class="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded-lg text-sm font-semibold"
         >
             + Tambah Data
@@ -43,7 +43,7 @@
                     </td>
                     <td class="px-4 py-2 border text-center space-x-2">
                         <a
-                            href="{{ route('product.edit', $product->id) }}"
+                            href="{{ route('products.edit', $product->id) }}"
                             class="text-teal-600 hover:underline text-sm"
                         >
                             Edit
