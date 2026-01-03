@@ -67,6 +67,15 @@ class ProductController extends Controller
     }
 
     /**
+     * Display detail view for the specified product.
+     */
+    public function detail(string $id)
+    {
+        $product = Product::with('category')->findOrFail($id);
+        return view('dashboard.product.detail', compact('product'));
+    }
+
+    /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)

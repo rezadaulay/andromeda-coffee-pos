@@ -43,6 +43,12 @@
                     </td>
                     <td class="px-4 py-2 border text-center space-x-2">
                         <a
+                            href="{{ route('products.detail', $product->id) }}"
+                            class="text-blue-600 hover:underline text-sm mr-2"
+                        >
+                            Detail
+                        </a>
+                        <a
                             href="{{ route('products.edit', $product->id) }}"
                             class="text-teal-600 hover:underline text-sm"
                         >
