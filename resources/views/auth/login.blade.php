@@ -3,7 +3,8 @@
 @section('content')
   <div class="min-h-screen flex items-center justify-center">
     <div class="w-full max-w-md bg-white p-8 rounded-xl shadow">
-            <h1 class="text-2xl font-bold text-center mb-6">Login</h1>
+            <img src="/images/logo.png" class="h-35 m-auto" alt="">
+            {{-- <h1 class="text-2xl font-bold text-center mb-6 mt-2">Login</h1> --}}
 
             @if ($errors->any())
                 <div class="mb-4 text-center text-sm text-red-600">

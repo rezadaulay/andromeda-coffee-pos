@@ -21,7 +21,8 @@
 
                 <!-- Logo -->
                 <div class="flex items-center">
-                    <span class="text-xl font-bold text-teal-600">Andromeda</span>
+                    <img src="/images/logo-nav.png" class="h-10 m-auto" alt="">
+                    {{-- <span class="text-xl font-bold text-teal-600">Andromeda</span> --}}
                 </div>
 
                 <!-- Desktop Menu -->
