@@ -39,7 +39,7 @@ class ProductCategoryController extends Controller
         ProductCategory::create([
             'name' => $request->name,
         ]);
-        return back()->with('success', 'Kategori berhasil ditambahkan');
+        return redirect()->route('product-categories.index')->with('success', 'Kategori berhasil ditambahkan');
     }
 
    

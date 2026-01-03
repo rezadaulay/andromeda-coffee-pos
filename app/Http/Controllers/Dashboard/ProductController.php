@@ -50,10 +50,7 @@ class ProductController extends Controller
      "product_category_id" => $request->product_category_id,
     ]);
 
-    return back()->with('success',"Produk berhasil ditambah");
-       
-
-        return view('dashboard.products.index', compact('products'));
+    return redirect()->route('products.index')->with('success', "Produk berhasil ditambah");
 
     }
 

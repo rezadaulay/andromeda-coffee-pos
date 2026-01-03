@@ -15,6 +15,12 @@
         </a>
     </div>
     <div class="overflow-x-auto">
+        @if (session('success'))
+            <div class="mb-4 p-2 bg-green-100 text-green-800 rounded">{{ session('success') }}</div>
+        @endif
+        @if (session('error'))
+            <div class="mb-4 p-2 bg-red-100 text-red-800 rounded">{{ session('error') }}</div>
+        @endif
        
 
         <table class="min-w-full border border-gray-200">

@@ -40,7 +40,7 @@ class PaymentMethodController extends Controller
             'description' => $request->description,
         ]);
 
-        return back()->with('success', 'Metode pembayaran berhasil diperbarui!');
+        return redirect()->route('paymentmethod.index')->with('success', 'Metode pembayaran berhasil ditambahkan!');
     }
 
     /**
@@ -68,7 +68,7 @@ class PaymentMethodController extends Controller
             'description' => $request->description,
         ]);
 
-        return back()->with('success', 'Metode pembayaran berhasil diperbarui!');
+        return redirect()->route('paymentmethod.index')->with('success', 'Metode pembayaran berhasil diperbarui!');
     }
 
     public function delete($id)
