@@ -50,10 +50,7 @@ class ProductController extends Controller
      "product_category_id" => $request->product_category_id,
     ]);
 
-    return back()->with('success',"Produk berhasil ditambah");
-       
-
-        return view('dashboard.products.index', compact('products'));
+    return redirect()->route('products.index')->with('success', "Produk berhasil ditambah");
 
     }
 
@@ -64,6 +61,15 @@ class ProductController extends Controller
     {
 
         //
+    }
+
+    /**
+     * Display detail view for the specified product.
+     */
+    public function detail(string $id)
+    {
+        $product = Product::with('category')->findOrFail($id);
+        return view('dashboard.product.detail', compact('product'));
     }
 
     /**

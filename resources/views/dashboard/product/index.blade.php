@@ -15,6 +15,12 @@
         </a>
     </div>
     <div class="overflow-x-auto">
+        @if (session('success'))
+            <div class="mb-4 p-2 bg-green-100 text-green-800 rounded">{{ session('success') }}</div>
+        @endif
+        @if (session('error'))
+            <div class="mb-4 p-2 bg-red-100 text-red-800 rounded">{{ session('error') }}</div>
+        @endif
        
 
         <table class="min-w-full border border-gray-200">
@@ -43,8 +49,14 @@
                     </td>
                     <td class="px-4 py-2 border text-center space-x-2">
                         <a
+                            href="{{ route('products.detail', $product->id) }}"
+                            class="text-blue-600 hover:underline text-sm mr-2"
+                        >
+                            Detail
+                        </a>
+                        <a
                             href="{{ route('products.edit', $product->id) }}"
-                            class="text-teal-600 hover:underline text-sm"
+                            class="text-yellow-600 hover:underline text-sm"
                         >
                             Edit
                         </a>
