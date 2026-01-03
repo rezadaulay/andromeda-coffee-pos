@@ -25,6 +25,7 @@
                     <a href="{{ route('products.index') }}" class="text-gray-700 hover:text-indigo-600 font-medium">Produk</a>
                     <a href="{{ route('product-categories.index') }}" class="text-gray-700 hover:text-indigo-600 font-medium">Kategori</a>
                     <a href="#" class="text-gray-700 hover:text-indigo-600 font-medium">User</a>
+                    <a href="{{ route('payment-methods.index') }}" class="text-gray-700 hover:text-indigo-600 font-medium">Metode Pembayaran</a>
                     <a href="{{ route('dashboard.logout') }}" class="text-gray-700 hover:text-indigo-600 font-medium">Logout</a>
                 </div>
 
