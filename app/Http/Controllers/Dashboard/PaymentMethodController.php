@@ -66,14 +66,12 @@ class PaymentMethodController extends Controller
             'description' => $request->description,
         ]);
 
-        return back()->with('success', 'Metode pembayaran berhasil diperbarui!');
+        return redirect()
+        ->route('paymentmethod.index')
+        ->with('success', 'Metode pembayaran berhasil diperbarui!');
     }
 
-    public function delete($id)
-    {
-    $method = PaymentMethod::findOrFail($id);
-    return view('dashboard.paymentmethod.delete', compact('method'));
-    }
+
 
 
     public function destroy(string $id)

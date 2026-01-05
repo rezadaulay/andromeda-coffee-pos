@@ -24,10 +24,7 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
 
     Route::resource('product', ProductController::class);
     Route::resource('paymentmethod',PaymentMethodController::class);
-    Route::get(
-    'paymentmethod/{id}/delete',
-    [PaymentMethodController::class, 'delete']
-    )->name('paymentmethod.delete');
+
 
     Route::resource('products', ProductController::class);
    

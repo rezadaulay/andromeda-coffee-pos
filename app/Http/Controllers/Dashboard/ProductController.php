@@ -3,14 +3,10 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
-
 use Illuminate\Http\Request;
 use App\Models\Product;
 use \App\Models\ProductCategory;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
-
-
-
 
 class ProductController extends Controller
 {
@@ -20,7 +16,6 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::with('category')->paginate(20);
-
         return view("dashboard.product.index",compact('products'));
     }
 
@@ -52,9 +47,6 @@ class ProductController extends Controller
 
     return back()->with('success',"Produk berhasil ditambah");
        
-
-        return view('dashboard.products.index', compact('products'));
-
     }
 
     /**
@@ -62,7 +54,6 @@ class ProductController extends Controller
      */
     public function show(string $id)
     {
-
         //
     }
 
@@ -83,7 +74,7 @@ class ProductController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'price' => 'required',
+            'price' => 'required|numeric',
             'product_category_id' => 'required|exists:product_categories,id',
         ]);
 
@@ -103,9 +94,5 @@ class ProductController extends Controller
     public function destroy(string $id)
     {
         //
-
-        $product = Product::with('category')->findOrFail($id);
-        return view('dashboard.products.show', compact('product'));
-
     }
 }
