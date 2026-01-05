@@ -5,6 +5,7 @@ use App\Http\Controllers\Dashboard\IndexController;
 use App\Http\Controllers\Dashboard\LogoutController;
 use App\Http\Controllers\Dashboard\ProductCategoryController;
 use App\Http\Controllers\Dashboard\ProductController;
+use App\Http\Controllers\Dashboard\PaymentMethodController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -31,6 +32,10 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::get('/debug/product/delete/{id}', [ProductController::class, 'destroy'])->name('debug.product.delete');
     // Route::get('/users', IndexController::class)->name('dashboard.index');
     // Route::get('/sales', IndexController::class)->name('dashboard.index');
+
+    // Payment Method
+    Route::get('/payment', [PaymentMethodController::class, 'index'])->name('payment-method.index');
+    Route::get('/payment/detail/{id}', [PaymentMethodController::class, 'show'])->name('payment-methods.detail');
 }); // https://laravel.com/docs/12.x/middleware
 
 

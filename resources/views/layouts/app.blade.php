@@ -21,6 +21,7 @@
 
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex space-x-6">
+                    <a href="{{ route('payment-method.index') }}" class="text-gray-700 hover:text-indigo-600 font-medium">Pembayaran</a>
                     <a href="#" class="text-gray-700 hover:text-indigo-600 font-medium">Penjualan</a>
                     <a href="#" class="text-gray-700 hover:text-indigo-600 font-medium">Produk</a>
                     <a href="{{ route('product-categories.index') }}" class="text-gray-700 hover:text-indigo-600 font-medium">Kategori</a>
