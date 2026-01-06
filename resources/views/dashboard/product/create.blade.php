@@ -17,7 +17,7 @@
                     Lengkapi semua kolom!
                 </div>
             @endif
-            <form action="{{ route('product.store') }}" method="POST">
+            <form action="{{ route('products.store') }}" method="POST">
                 @csrf
 
                 <div>

@@ -46,6 +46,35 @@ class PaymentMethodController extends Controller
     }
 
 
+   
+    public function edit(string $id)
+    {
+        $method = PaymentMethod::findOrFail($id);
+        return view("dashboard.paymentmethod.edit",compact('method'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        $validated = $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+        ]);
+
+        $method = PaymentMethod::findOrFail($id);
+        $method->update([
+            'name' => $request->name,
+            'description' => $request->description,
+        ]);
+
+         return redirect()
+    ->route('paymentmethod.index')
+    ->with('success',"Produk berhasil diedit");
+    }
+
+
 
     public function destroy(string $id)
     {
@@ -53,6 +82,6 @@ class PaymentMethodController extends Controller
         $method->delete();
 
         return redirect()->route('paymentmethod.index')
-                     ->with('success', 'Metode pembayaran berhasil ditambahkan');
+                     ->with('success', 'Metode pembayaran berhasil dihapus');
     }
 }

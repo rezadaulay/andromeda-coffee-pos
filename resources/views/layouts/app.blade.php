@@ -21,15 +21,16 @@
 
                 <!-- Logo -->
                 <div class="flex items-center">
-                    <span class="text-xl font-bold text-teal-600">Andromeda</span>
+                    <img src="/images/logo-nav.png" class="h-10 m-auto" alt="">
+                    {{-- <span class="text-xl font-bold text-teal-600">Andromeda</span> --}}
                 </div>
 
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex space-x-6">
-                    <a href="#" class="text-gray-700 hover:text-indigo-600 font-medium">Penjualan</a>
- 
-                    <a href="{{ route('product.index')}}" class="text-gray-700 hover:text-indigo-600 font-medium">Produk</a>
 
+
+                    <a href="#" class="text-gray-700 hover:text-indigo-600 font-medium">Penjualan</a> 
+                    <a href="{{ route('products.index') }}" class="text-gray-700 hover:text-indigo-600 font-medium">Produk</a>
 
                     <a href="{{ route('product-categories.index') }}" class="text-gray-700 hover:text-indigo-600 font-medium">Kategori</a>
                     <a href="#" class="text-gray-700 hover:text-indigo-600 font-medium">User</a>

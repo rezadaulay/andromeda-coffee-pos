@@ -35,7 +35,7 @@ class ProductController extends Controller
     {
     $request->validate([
      'name' => 'required',
-     'price' => 'required',
+     'price' => 'required|numeric',
      'product_category_id' => 'required|exists:product_categories,id',
     ]);
 
@@ -45,7 +45,9 @@ class ProductController extends Controller
      "product_category_id" => $request->product_category_id,
     ]);
 
-    return back()->with('success',"Produk berhasil ditambah");
+    return redirect()
+    ->route('products.index')
+    ->with('success',"Produk berhasil ditambah");
        
     }
 
@@ -85,7 +87,7 @@ class ProductController extends Controller
             'product_category_id' => $request->product_category_id,
         ]);
 
-        return redirect()->route('product.index')->with('success', 'Produk berhasil diupdate');
+        return redirect()->route('products.index')->with('success', 'Produk berhasil diupdate');
     }
 
     /**
