@@ -44,8 +44,13 @@
                             href="{{ route('product-categories.edit', $category->id) }}"
                             class="text-yellow-600 hover:underline text-sm"
                         >
-                            Edit
+                            Hapus
                         </a>
+
+                        <form id="delete-category-{{ $category->id }}" action="{{ route('product-categories.destroy', $category->id) }}" method="POST" style="display:none;">
+                            @csrf
+                            @method('DELETE')
+                        </form>
                     </td>
                 </tr>
                 @endforeach
