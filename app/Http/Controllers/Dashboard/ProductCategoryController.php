@@ -15,10 +15,9 @@ class ProductCategoryController extends Controller
      */
     public function index()
     {
-        $categories = ProductCategory::paginate(20); // 20 item per halaman
-        return view('dashboard.product-category.index', compact('categories'));
+        $categories = ProductCategory::all();
+        return view("dashboard.product-category.index", compact("categories"));
     }
-
     /**
      * Show the form for creating a new resource.
      */
@@ -39,13 +38,16 @@ class ProductCategoryController extends Controller
         ProductCategory::create([
             'name' => $request->name,
         ]);
-        return back()->with('success', 'Kategori berhasil ditambahkan');
+        return redirect()->route('product-categories.index')->with('success', 'Kategori berhasil ditambahkan');
     }
 
-   
-    public function show(string $id)
-    {
-        //
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id) {
+        $category = ProductCategory::with('products')->findOrFail($id);
+
+        return view("dashboard.product-category.detail", compact('category'));
     }
 
     /**
@@ -79,6 +81,8 @@ class ProductCategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        return redirect()->route('product-categories.index')->with('error', 'Fungsi hapus kategori dinonaktifkan sementara');
+        ProductCategory::findOrFail($id)->delete();
+
+        return redirect()->route('product-categories.index')->with('success', 'Kategori berhasil dihapus');
     }
 }

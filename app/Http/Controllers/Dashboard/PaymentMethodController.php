@@ -8,13 +8,10 @@ use App\Models\PaymentMethod;
 
 class PaymentMethodController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        $methods = PaymentMethod::paginate(20);
-        return view("dashboard.paymentmethod.index",compact('methods'));
+
+    public function index(){
+        $paymentMethods = PaymentMethod::orderBy('name')->paginate(20);
+        return view('dashboard.payment-method.index', compact('paymentMethods'));
     }
 
     /**
@@ -40,9 +37,12 @@ class PaymentMethodController extends Controller
             'description' => $request->description,
         ]);
 
-        return redirect()
-        ->route('paymentmethod.index')
-        ->with('success', 'Metode pembayaran berhasil diperbarui!');
+        return redirect()->route('paymentmethod.index')->with('success', 'Metode pembayaran berhasil ditambahkan!');
+    }
+    
+    public function show(string $id){
+        $paymentMethod = PaymentMethod::findOrFail($id);
+        return view('dashboard.payment-method.detail', compact('paymentMethod'));
     }
 
 
@@ -69,9 +69,7 @@ class PaymentMethodController extends Controller
             'description' => $request->description,
         ]);
 
-         return redirect()
-    ->route('paymentmethod.index')
-    ->with('success',"Produk berhasil diedit");
+        return redirect()->route('paymentmethod.index')->with('success', 'Metode pembayaran berhasil diperbarui!');
     }
 
 
