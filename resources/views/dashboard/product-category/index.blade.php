@@ -40,17 +40,22 @@
                         {{$category->name}}
                     </td>
                     <td class="px-4 py-2 border text-center space-x-2">
-                        <a
-                            href="{{ route('product-categories.edit', $category->id) }}"
-                            class="text-yellow-600 hover:underline text-sm"
-                        >
-                            Hapus
-                        </a>
+                        <div class="flex items-center justify-center">
+                            <a
+                                href="{{ route('product-categories.show', $category->id) }}"
+                                class="text-blue-600 hover:underline text-sm mr-2"
+                            >
+                                Detail
+                            </a>
 
-                        <form id="delete-category-{{ $category->id }}" action="{{ route('product-categories.destroy', $category->id) }}" method="POST" style="display:none;">
-                            @csrf
-                            @method('DELETE')
-                        </form>
+                            
+
+                            <form id="delete-category-{{ $category->id }}" action="{{ route('product-categories.destroy', $category->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus kategori ini?');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="text-yellow-600 hover:underline text-sm">Hapus</button>
+                            </form>
+                        </div>
                     </td>
                 </tr>
                 @endforeach

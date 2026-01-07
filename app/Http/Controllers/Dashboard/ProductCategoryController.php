@@ -15,7 +15,7 @@ class ProductCategoryController extends Controller
      */
     public function index()
     {
-        $categories = ProductCategory::all();
+        $categories = ProductCategory::paginate();
         return view("dashboard.product-category.index", compact("categories"));
     }
     /**
