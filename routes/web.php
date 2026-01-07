@@ -29,6 +29,7 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     )->name('paymentmethod.delete');
 
     Route::resource('products', ProductController::class);
+    Route::get('products/{id}/detail', [ProductController::class, 'detail'])->name('products.detail');
     Route::get('/metode-pemabayaran', [PaymentMethodController::class, 'index'])->name('payment-methods.index');
     Route::get('/metode-pemabayaran/create', [PaymentMethodController::class, 'create'])->name('payment-methods.create');
     Route::post('/metode-pemabayaran', [PaymentMethodController::class, 'store'])->name('payment-methods.store');

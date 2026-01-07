@@ -41,8 +41,8 @@
                     </td>
                     <td class="px-4 py-2 border text-center space-x-2">
                         <a
-                            href="#"
-                            class="text-teal-600 hover:underline text-sm"
+                            href="{{ route('product-categories.edit', $category->id) }}"
+                            class="text-yellow-600 hover:underline text-sm"
                         >
                             Edit
                         </a>
