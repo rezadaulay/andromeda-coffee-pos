@@ -21,15 +21,12 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::get('/', IndexController::class)->name('dashboard.index');
     Route::get('/logout', LogoutController::class)->name('dashboard.logout');
     
-    Route::get('/product-category/detail/{id}', [ProductCategoryController::class, "show"]);
-    Route::get('/product-category/delete/{id}', [ProductCategoryController::class, "destroy"])->name('product-category.delete');
     Route::resource('product-categories', ProductCategoryController::class);
+    Route::resource('products', ProductController::class);
 
     Route::resource('paymentmethod',PaymentMethodController::class);
 
 
-    Route::resource('products', ProductController::class);
-    Route::get('products/{id}/detail', [ProductController::class, 'detail'])->name('products.detail');
     Route::get('/metode-pemabayaran', [PaymentMethodController::class, 'index'])->name('payment-methods.index');
     Route::get('/metode-pemabayaran/create', [PaymentMethodController::class, 'create'])->name('payment-methods.create');
     Route::post('/metode-pemabayaran', [PaymentMethodController::class, 'store'])->name('payment-methods.store');

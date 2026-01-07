@@ -47,7 +47,7 @@ class ProductCategoryController extends Controller
     public function show(string $id) {
         $category = ProductCategory::with('products')->findOrFail($id);
 
-        return view("dashboard.product-category.detail", compact('category'));
+        return view("dashboard.product-category.show", compact('category'));
     }
 
     /**

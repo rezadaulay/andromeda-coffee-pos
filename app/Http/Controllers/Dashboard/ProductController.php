@@ -54,16 +54,8 @@ class ProductController extends Controller
      */
     public function show(string $id)
     {
-        //
-    }
-
-    /**
-     * Display detail view for the specified product.
-     */
-    public function detail(string $id)
-    {
         $product = Product::with('category')->findOrFail($id);
-        return view('dashboard.product.detail', compact('product'));
+        return view('dashboard.product.show', compact('product'));
     }
 
     /**
@@ -102,6 +94,8 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Product::findOrFail($id)->delete();
+
+        return redirect()->route('products.index')->with('success', 'Produk berhasil dihapus');
     }
 }
