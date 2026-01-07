@@ -23,13 +23,20 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::get('/product-category/detail/{id}', [ProductCategoryController::class, "show"]);
     Route::get('/product-category/delete/{id}', [ProductCategoryController::class, "destroy"])->name('product-category.delete');
     Route::resource('product-categories', ProductCategoryController::class);
-    // Products resource (for proper delete) and debug routes
-    Route::resource('products', ProductController::class)->only(['destroy']);
 
-    // Debug routes: temporary product list and delete for testing
-    Route::get('/debug/products', [ProductController::class, 'index'])->name('debug.products');
+    Route::resource('paymentmethod',PaymentMethodController::class);
+    Route::get(
+    'paymentmethod/{id}/delete',
+    [PaymentMethodController::class, 'delete']
+    )->name('paymentmethod.delete');
 
-    Route::get('/debug/product/delete/{id}', [ProductController::class, 'destroy'])->name('debug.product.delete');
+    Route::resource('products', ProductController::class);
+    Route::get('products/{id}/detail', [ProductController::class, 'detail'])->name('products.detail');
+    Route::get('/metode-pemabayaran', [PaymentMethodController::class, 'index'])->name('payment-methods.index');
+    Route::get('/metode-pemabayaran/create', [PaymentMethodController::class, 'create'])->name('payment-methods.create');
+    Route::post('/metode-pemabayaran', [PaymentMethodController::class, 'store'])->name('payment-methods.store');
+   
+
     // Route::get('/users', IndexController::class)->name('dashboard.index');
     // Route::get('/sales', IndexController::class)->name('dashboard.index');
 
@@ -37,6 +44,7 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::get('/payment', [PaymentMethodController::class, 'index'])->name('payment-method.index');
     Route::get('/payment/detail/{id}', [PaymentMethodController::class, 'show'])->name('payment-methods.detail');
 }); // https://laravel.com/docs/12.x/middleware
+
 
 
 // Route::get('/', function () {
