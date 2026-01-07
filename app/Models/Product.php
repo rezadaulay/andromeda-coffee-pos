@@ -11,6 +11,7 @@ class Product extends Model
     protected $fillable = [
         'product_category_id',
         'name',
+        'quantity',
         'price',
     ];
 
@@ -27,6 +28,7 @@ class Product extends Model
     protected function casts(): array
     {
         return [
+            'quantity' => 'integer',
             'product_category_id' => 'integer',
             'price' => 'decimal:2',
         ];
