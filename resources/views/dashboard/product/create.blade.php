@@ -44,6 +44,7 @@
                   
                 </div>
                 <br>
+                        <label class="block text-sm font-medium mb-1">Pilih kategori</label>
                         <select name="product_category_id" class="w-full p-2 rounded border-2 border-gray-300 focus:border-teal-500 focus:ring-teal-500" required>
                             <option value="">-- Pilih Kategori --</option>
                             @foreach($categories as $category)
@@ -55,7 +56,7 @@
                             <button
                     type="submit"
                     class="w-full mt-3 bg-teal-600 hover:bg-teal-700 text-white py-2 rounded-lg font-semibold"
-                >
+                    >
                     Simpan
                 </button>
                 </div>
