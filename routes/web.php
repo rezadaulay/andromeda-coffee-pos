@@ -24,20 +24,13 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::resource('product-categories', ProductCategoryController::class);
     Route::resource('products', ProductController::class);
 
-    Route::resource('paymentmethod',PaymentMethodController::class);
+    Route::resource('payment-methods',PaymentMethodController::class);
 
-
-    Route::get('/metode-pemabayaran', [PaymentMethodController::class, 'index'])->name('payment-methods.index');
-    Route::get('/metode-pemabayaran/create', [PaymentMethodController::class, 'create'])->name('payment-methods.create');
-    Route::post('/metode-pemabayaran', [PaymentMethodController::class, 'store'])->name('payment-methods.store');
-   
 
     // Route::get('/users', IndexController::class)->name('dashboard.index');
     // Route::get('/sales', IndexController::class)->name('dashboard.index');
 
     // Payment Method
-    Route::get('/payment', [PaymentMethodController::class, 'index'])->name('payment-method.index');
-    Route::get('/payment/detail/{id}', [PaymentMethodController::class, 'show'])->name('payment-methods.detail');
 }); // https://laravel.com/docs/12.x/middleware
 
 

@@ -16,14 +16,14 @@ class ProductCategoryController extends Controller
     public function index()
     {
         $categories = ProductCategory::paginate();
-        return view("dashboard.product-category.index", compact("categories"));
+        return view("dashboard.product-categories.index", compact("categories"));
     }
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        return view('dashboard.product-category.create');
+        return view('dashboard.product-categories.create');
     }
 
     /**
@@ -47,7 +47,7 @@ class ProductCategoryController extends Controller
     public function show(string $id) {
         $category = ProductCategory::with('products')->findOrFail($id);
 
-        return view("dashboard.product-category.show", compact('category'));
+        return view("dashboard.product-categories.show", compact('category'));
     }
 
     /**
@@ -56,7 +56,7 @@ class ProductCategoryController extends Controller
     public function edit(string $id)
     {
         $category = ProductCategory::findOrFail($id);
-        return view('dashboard.product-category.edit', compact('category'));
+        return view('dashboard.product-categories.edit', compact('category'));
     }
 
     /**

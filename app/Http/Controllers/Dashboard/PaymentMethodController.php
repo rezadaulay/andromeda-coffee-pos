@@ -11,7 +11,7 @@ class PaymentMethodController extends Controller
 
     public function index(){
         $paymentMethods = PaymentMethod::orderBy('name')->paginate(20);
-        return view('dashboard.payment-method.index', compact('paymentMethods'));
+        return view('dashboard.payment-methods.index', compact('paymentMethods'));
     }
 
     /**
@@ -19,7 +19,7 @@ class PaymentMethodController extends Controller
      */
     public function create()
     {
-        return view('dashboard.payment-method.create');
+        return view('dashboard.payment-methods.create');
     }
 
     /**
@@ -37,7 +37,7 @@ class PaymentMethodController extends Controller
             'description' => $request->description,
         ]);
 
-        return redirect()->route('paymentmethod.index')->with('success', 'Metode pembayaran berhasil ditambahkan!');
+        return redirect()->route('payment-methods.index')->with('success', 'Metode pembayaran berhasil ditambahkan!');
     }
     
     public function show(string $id){
@@ -50,7 +50,7 @@ class PaymentMethodController extends Controller
     public function edit(string $id)
     {
         $method = PaymentMethod::findOrFail($id);
-        return view("dashboard.paymentmethod.edit",compact('method'));
+        return view("dashboard.payment-methods.edit",compact('method'));
     }
 
     /**
@@ -69,7 +69,7 @@ class PaymentMethodController extends Controller
             'description' => $request->description,
         ]);
 
-        return redirect()->route('paymentmethod.index')->with('success', 'Metode pembayaran berhasil diperbarui!');
+        return redirect()->route('payment-methods.index')->with('success', 'Metode pembayaran berhasil diperbarui!');
     }
 
 
@@ -79,7 +79,7 @@ class PaymentMethodController extends Controller
         $method = PaymentMethod::findOrFail($id);
         $method->delete();
 
-        return redirect()->route('paymentmethod.index')
+        return redirect()->route('payment-methods.index')
                      ->with('success', 'Metode pembayaran berhasil dihapus');
     }
 }

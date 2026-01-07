@@ -10,7 +10,7 @@
 
 <div class="flex justify-between items-center mb-4">
     <h1 class="text-xl font-bold">Daftar Payment Method</h1>
-    <a href="{{ route('paymentmethod.create') }}" class="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded-lg text-sm font-semibold">
+    <a href="{{ route('payment-methods.create') }}" class="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded-lg text-sm font-semibold">
         + Tambah Data
     </a>
 </div>
@@ -25,13 +25,13 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($methods as $method)
+            @foreach($paymentMethods as $method)
             <tr class="hover:bg-gray-50">
                 <td class="px-4 py-2 border">{{ $method->name }}</td>
                 <td class="px-4 py-2 border">{{ $method->description }}</td>
                 <td class="px-4 py-2 border text-center space-x-2">
                     <!-- Edit -->
-                    <a href="{{ route('paymentmethod.edit', $method->id) }}" class="text-yellow-600 hover:underline text-sm">Edit</a>
+                    <a href="{{ route('payment-methods.edit', $method->id) }}" class="text-yellow-600 hover:underline text-sm">Edit</a>
 
                     <!-- Hapus langsung -->
                     <a href="#"
@@ -45,7 +45,7 @@
                     </a>
 
                     
-                    <form id="{{ $method->id }}" action="{{ route('paymentmethod.destroy', $method->id) }}" method="POST" style="display:none;">
+                    <form id="{{ $method->id }}" action="{{ route('payment-methods.destroy', $method->id) }}" method="POST" style="display:none;">
                         @csrf
                         @method('DELETE')
                     </form>
@@ -56,7 +56,7 @@
     </table>
 
     <div class="mt-4">
-        {{ $methods->links() }}
+        {{ $paymentMethods->links() }}
     </div>
 </div>
 

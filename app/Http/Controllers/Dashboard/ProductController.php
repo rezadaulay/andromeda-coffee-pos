@@ -16,7 +16,7 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::with('category')->paginate(20);
-        return view("dashboard.product.index",compact('products'));
+        return view("dashboard.products.index",compact('products'));
     }
 
     /**
@@ -25,7 +25,7 @@ class ProductController extends Controller
     public function create()
     {
          $categories = ProductCategory::all();
-         return view("dashboard.product.create", compact('categories'));
+         return view("dashboard.products.create", compact('categories'));
     }
 
     /**
@@ -55,7 +55,7 @@ class ProductController extends Controller
     public function show(string $id)
     {
         $product = Product::with('category')->findOrFail($id);
-        return view('dashboard.product.show', compact('product'));
+        return view('dashboard.products.show', compact('product'));
     }
 
     /**
@@ -65,7 +65,7 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($id);
         $categories = ProductCategory::all();
-        return view('dashboard.product.edit', compact('product', 'categories'));
+        return view('dashboard.products.edit', compact('product', 'categories'));
     }
 
     /**
