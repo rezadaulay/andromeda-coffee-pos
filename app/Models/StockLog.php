@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Enums\StockLogType;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Auth;
 
 class StockLog extends Model
 {
@@ -39,5 +40,19 @@ class StockLog extends Model
     public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class);
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    protected static function booted(): void
+    {
+        static::creating(function (self $model) {
+            if (empty($model->user_id)) {
+                $model->user_id = Auth::id() ?? null;
+            }
+        });
     }
 }
