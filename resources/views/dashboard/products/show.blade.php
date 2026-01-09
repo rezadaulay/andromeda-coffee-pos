@@ -8,7 +8,6 @@
       <div class="flex items-center gap-3">
         <a href="{{ route('products.index') }}" class="text-sm text-gray-600 hover:text-teal-600">&larr; Kembali</a>
         <a href="{{ route('products.edit', $product->id) }}" class="inline-flex items-center px-3 py-1.5 bg-teal-600 text-white text-sm rounded hover:bg-teal-700">Edit</a>
-
         <form action="{{ route('products.destroy', $product->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus kategori ini?');">
           @csrf
           @method('DELETE')
