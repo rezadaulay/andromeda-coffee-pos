@@ -6,7 +6,7 @@ use App\Http\Controllers\Dashboard\LogoutController;
 use App\Http\Controllers\Dashboard\ProductCategoryController;
 use App\Http\Controllers\Dashboard\ProductController;
 use App\Http\Controllers\Dashboard\PaymentMethodController;
-
+use App\Http\Controllers\Dashboard\ManagementStockController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -25,6 +25,7 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::resource('products', ProductController::class);
 
     Route::resource('payment-methods',PaymentMethodController::class);
+    Route::resource('management-stock',ManagementStockController::class);
 
 
     // Route::get('/users', IndexController::class)->name('dashboard.index');
