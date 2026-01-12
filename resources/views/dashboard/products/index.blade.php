@@ -28,6 +28,7 @@
                 <tr>
                     <th class="px-4 py-2 text-left text-sm font-semibold border">Nama</th>
                     <th class="px-4 py-2 text-left text-sm font-semibold border">Harga</th>
+                    <th class="px-4 py-2 text-left text-sm font-semibold border">Stok</th>
                     <th class="px-4 py-2 text-left text-sm font-semibold border">Kategori</th>
                     <th class="px-4 py-2 text-center text-sm font-semibold border">Aksi</th>
                 </tr>
@@ -42,7 +43,10 @@
                        {{$product->name}}
                     </td>
                     <td class="px-4 py-2 border">
-                       {{$product->price}}
+                       {{$product->price}}  
+                    </td>
+                    <td class="px-4 py-2 border">
+                       {{$product->quantity}}
                     </td>
                     <td class="px-4 py-2 border">
                         {{$product->category ? $product->category->name : '-'}}
