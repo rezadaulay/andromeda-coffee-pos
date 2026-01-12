@@ -43,7 +43,7 @@
                   
                 </div>
                 <div>
-                    <label class="block text-sm font-medium mb-1">Stock</label>
+                    <label class="block text-sm font-medium mb-1">Stok Awal</label>
                     <input
                             type="number"
                         name="quantity"
