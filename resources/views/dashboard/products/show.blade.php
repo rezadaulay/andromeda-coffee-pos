@@ -27,6 +27,10 @@
         <span>{{ $product->price }}</span>
       </div>
       <div>
+        <span class="font-semibold">Stok:</span>
+        <span>{{ $product->quantity }}</span>
+      </div>
+      <div>
         <span class="font-semibold">Kategori:</span>
         <span>{{ $product->category ? $product->category->name : '-' }}</span>
       </div>

@@ -34,9 +34,19 @@
                 <div>
                     <label class="block text-sm font-medium mb-1">Price</label>
                     <input
-                            type="number"
-                        type="text"
+                            type="number"                        
                         name="price"
+                        class="w-full p-2 rounded border-2 border-gray-300 focus:border-teal-500 focus:ring-teal-500"
+                           
+                        required
+                    >
+                  
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-1">Stock</label>
+                    <input
+                            type="number"
+                        name="quantity"
                         class="w-full p-2 rounded border-2 border-gray-300 focus:border-teal-500 focus:ring-teal-500"
                            
                         required
