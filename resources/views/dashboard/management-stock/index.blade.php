@@ -21,7 +21,6 @@
             <tr>
                 <th class="px-4 py-2 text-left text-sm font-semibold border">Nama Produk</th>
                 <th class="px-4 py-2 text-left text-sm font-semibold border">Jumlah Stok</th>
-                <th class="px-4 py-2 text-center text-sm font-semibold border">Aksi</th>
             </tr>
         </thead>
         <tbody>
@@ -32,11 +31,6 @@
                 </td>
                 <td class="px-4 py-2 border">
                     {{ $product->quantity }}
-                </td>
-                <td class="px-4 py-2 border text-center">
-                    <a href="{{ route('management-stock.edit', $product->id) }}" class="text-blue-600 hover:underline text-sm">
-                        Edit
-                    </a>
                 </td>
             </tr>
             @endforeach
