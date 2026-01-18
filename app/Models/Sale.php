@@ -6,9 +6,21 @@ use App\Enums\SaleStatus;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Auth;
 
 class Sale extends Model
 {
+    /**
+     * The "booted" method of the model.
+     */
+    protected static function booted(): void
+    {
+        static::creating(function (Sale $sale) {
+            $sale->sale_number = $sale->generateSaleNumber();
+            $sale->user_id = Auth::id();
+        });
+    }
+
     /**
      * The attributes that are mass assignable.
      *
@@ -50,5 +62,10 @@ class Sale extends Model
     public function detailSales(): HasMany
     {
         return $this->hasMany(DetailSale::class);
+    }
+
+    private function generateSaleNumber (): string
+    {
+        return 'INV-' . (self::count() + 1) . '-' . now()->format('Ymd');
     }
 }

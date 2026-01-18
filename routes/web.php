@@ -33,9 +33,3 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
 
     // Payment Method
 }); // https://laravel.com/docs/12.x/middleware
-
-
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
