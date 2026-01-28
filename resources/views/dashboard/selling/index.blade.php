@@ -276,7 +276,10 @@
                     });
                 }
                 const total = items.reduce((s, it) => s + it.quantity * it.price, 0);
-                modalTotal.textContent = formatRp(total);
+                if(modalTotal){
+                    modalTotal.textContent = formatRp(total);
+                    if(modalTotal.parentElement) modalTotal.parentElement.style.display = '';
+                }
                 showModal();
             });
         }
@@ -285,11 +288,65 @@
         if(modalCancel) modalCancel.addEventListener('click', hideModal);
 
         if(payBtn){
-            payBtn.addEventListener('click', function(){
-                // submit the original checkout form (save sale), payment chosen later
-                if(checkoutForm) {
-                    hideModal();
-                    checkoutForm.submit();
+            payBtn.addEventListener('click', async function(){
+                // perform AJAX save so we can show sale number immediately
+                const items = collectCart();
+                if(items.length === 0){
+                    alert('Tidak ada item untuk disimpan.');
+                    return;
+                }
+
+                const token = document.querySelector('input[name="_token"]')?.value;
+                if(!token){
+                    alert('CSRF token tidak ditemukan.');
+                    return;
+                }
+
+                // prepare payload
+                const payload = new URLSearchParams();
+                payload.append('cart_data', JSON.stringify(items));
+
+                // disable button while saving
+                payBtn.disabled = true;
+                payBtn.textContent = 'Menyimpan...';
+
+                try {
+                    const res = await fetch(`{{ route('selling.store') }}`, {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'X-CSRF-TOKEN': token,
+                            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                        },
+                        body: payload.toString()
+                    });
+
+                    if(!res.ok){
+                        const err = await res.json().catch(()=>null);
+                        throw new Error(err?.error || 'Gagal menyimpan penjualan');
+                    }
+
+                    const body = await res.json();
+
+                    // show sale number in modal
+                    if(modalItems) modalItems.innerHTML = `<div class="p-4 bg-green-50 rounded-lg text-green-800">Penjualan tersimpan. Nomor: <strong>${body.sale_number}</strong></div>`;
+                    if(modalTotal){
+                        modalTotal.textContent = '';
+                        if(modalTotal.parentElement) modalTotal.parentElement.style.display = 'none';
+                    }
+
+                    payBtn.textContent = 'Tutup';
+                    payBtn.disabled = false;
+                    // change payBtn to close modal and redirect to placeholder
+                    payBtn.onclick = function(){
+                        hideModal();
+                        window.location.href = '#';
+                    };
+
+                } catch (err){
+                    alert(err.message || 'Terjadi kesalahan saat menyimpan.');
+                    payBtn.disabled = false;
+                    payBtn.textContent = 'Simpan';
                 }
             });
         }

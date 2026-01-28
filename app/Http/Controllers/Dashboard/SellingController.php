@@ -89,7 +89,16 @@ class SellingController extends Controller
 
             DB::commit();
 
-            return redirect()->route('selling.show', $sale->id)->with('success', 'Penjualan disimpan dengan nomor ' . $sale->sale_number);
+            // If request expects JSON (AJAX), return sale details
+            if ($request->wantsJson()) {
+                return response()->json([
+                    'sale_id' => $sale->id,
+                    'sale_number' => $sale->sale_number,
+                ]);
+            }
+
+            // Sale created — keep status as pending and redirect to placeholder (#)
+            return redirect()->to('#')->with('success', 'Penjualan disimpan dengan nomor ' . $sale->sale_number);
         } catch (\Exception $e) {
             DB::rollBack();
             return back()->withErrors(['error' => $e->getMessage()]);

@@ -11,7 +11,10 @@
 <div class="flex justify-between items-center mb-4">
     <h1 class="text-xl font-bold">Management Stock Produk</h1>
     @if(request('product_id'))
+    
         <a href="{{ route('products.show', request('product_id')) }}" class="text-sm text-gray-600 hover:text-teal-600">&larr; Kembali</a>
+             
+
     @endif
 </div>
 
@@ -21,6 +24,7 @@
             <tr>
                 <th class="px-4 py-2 text-left text-sm font-semibold border">Nama Produk</th>
                 <th class="px-4 py-2 text-left text-sm font-semibold border">Jumlah Stok</th>
+                <th class="px-4 py-2 text-left text-sm font-semibold border">Aksi</th>
             </tr>
         </thead>
         <tbody>
@@ -31,6 +35,9 @@
                 </td>
                 <td class="px-4 py-2 border">
                     {{ $product->quantity }}
+                </td>
+                <td class="px-4 py-2 border">
+                      <a href="{{ route('management-stock.edit', request('product_id')) }}" class="text-blue-600 hover:underline text-sm mr-2">Edit</a>
                 </td>
             </tr>
             @endforeach
