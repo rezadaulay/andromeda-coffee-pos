@@ -1,0 +1,36 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+
+class Product extends Model
+{
+    protected $fillable = [
+        'product_category_id',
+        'name',
+        'quantity',
+        'price',
+    ];
+
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(ProductCategory::class, 'product_category_id');
+    }
+
+    public function detailSales(): HasMany
+    {
+        return $this->hasMany(DetailSale::class);
+    }
+
+    protected function casts(): array
+    {
+        return [
+            'quantity' => 'integer',
+            'product_category_id' => 'integer',
+            'price' => 'decimal:2',
+        ];
+    }
+}
