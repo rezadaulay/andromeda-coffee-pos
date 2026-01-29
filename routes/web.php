@@ -30,5 +30,6 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
 
     // Selling (kasir)
     Route::resource('selling', SellingController::class);
+    Route::get('/selling-history', [SellingController::class, 'history'])->name('selling.history');
     
 }); 

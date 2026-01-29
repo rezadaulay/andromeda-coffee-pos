@@ -7,9 +7,21 @@
             <h1 class="text-4xl font-black text-gray-900 tracking-tight">Katalog Produk</h1>
             <p class="text-gray-500 mt-1">Pilih produk berkualitas untuk transaksi hari ini.</p>
         </div>
-        <div class="bg-white px-4 py-2 rounded-2xl shadow-sm border border-gray-100">
-            <span class="text-sm text-gray-400 uppercase tracking-widest font-semibold">Unit Terpilih:</span>
-            <span id="cart-count" class="ml-2 text-xl font-bold text-teal-600">0</span>
+        <div class="group-content flex items-center gap-4">
+            <div class="flex items-center justify-center bg-white px-4 py-2 rounded-2xl shadow-sm border border-gray-100 w-30 h-15">
+                <a href="{{ route('selling.history') }}" class="flex flex-col items-center hover:text-teal-600 transition-colors duration-200">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+                    <path d="M3 3v5h5"></path>
+                    <path d="M12 7v5l4 2"></path>
+                    </svg>
+                    <span>History</span>
+                </a>
+            </div>
+            <div class="bg-white px-4 py-2 rounded-2xl shadow-sm border border-gray-100">
+                <span class="text-sm text-gray-400 uppercase tracking-widest font-semibold">Unit Terpilih:</span>
+                <span id="cart-count" class="ml-2 text-xl font-bold text-teal-600">0</span>
+            </div>
         </div>
     </div>
 
@@ -302,9 +314,10 @@
                     return;
                 }
 
-                // prepare payload
-                const payload = new URLSearchParams();
+                // prepare payload dengan FormData
+                const payload = new FormData();
                 payload.append('cart_data', JSON.stringify(items));
+                payload.append('_token', token);
 
                 // disable button while saving
                 payBtn.disabled = true;
@@ -314,19 +327,25 @@
                     const res = await fetch(`{{ route('selling.store') }}`, {
                         method: 'POST',
                         headers: {
+                            'X-Requested-With': 'XMLHttpRequest',
                             'Accept': 'application/json',
-                            'X-CSRF-TOKEN': token,
-                            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
                         },
-                        body: payload.toString()
+                        body: payload
                     });
 
-                    if(!res.ok){
-                        const err = await res.json().catch(()=>null);
-                        throw new Error(err?.error || 'Gagal menyimpan penjualan');
+                    // Check if response is actually JSON
+                    const contentType = res.headers.get('content-type');
+                    if (!contentType || !contentType.includes('application/json')) {
+                        const text = await res.text();
+                        console.error('Response bukan JSON:', text);
+                        throw new Error('Server tidak mengembalikan JSON. Status: ' + res.status);
                     }
 
                     const body = await res.json();
+
+                    if(!res.ok){
+                        throw new Error(body?.error || body?.message || 'Gagal menyimpan penjualan');
+                    }
 
                     // show sale number in modal
                     if(modalItems) modalItems.innerHTML = `<div class="p-4 bg-green-50 rounded-lg text-green-800">Penjualan tersimpan. Nomor: <strong>${body.sale_number}</strong></div>`;
@@ -337,13 +356,14 @@
 
                     payBtn.textContent = 'Tutup';
                     payBtn.disabled = false;
-                    // change payBtn to close modal and redirect to placeholder
+                    // change payBtn to close modal and redirect to show page
                     payBtn.onclick = function(){
                         hideModal();
-                        window.location.href = '#';
+                        window.location.href = `/dashboard/selling/${body.sale_id}`;
                     };
 
                 } catch (err){
+                    console.error('Error details:', err);
                     alert(err.message || 'Terjadi kesalahan saat menyimpan.');
                     payBtn.disabled = false;
                     payBtn.textContent = 'Simpan';

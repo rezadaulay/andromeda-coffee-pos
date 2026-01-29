@@ -36,18 +36,22 @@ class SellingController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'cart_data' => ['required','string'],
-            'payment_method' => ['nullable','integer','exists:payment_methods,id'],
-        ]);
-
-        $items = json_decode($data['cart_data'], true);
-        if(!is_array($items) || count($items) === 0){
-            return back()->withErrors(['cart_data' => 'Keranjang kosong.']);
-        }
-
-        DB::beginTransaction();
         try {
+            $data = $request->validate([
+                'cart_data' => ['required','string'],
+                'payment_method' => ['nullable','integer','exists:payment_methods,id'],
+            ]);
+
+            $items = json_decode($data['cart_data'], true);
+            if(!is_array($items) || count($items) === 0){
+                if ($request->wantsJson() || $request->header('Accept') === 'application/json') {
+                    return response()->json(['error' => 'Keranjang kosong.'], 422);
+                }
+                return back()->withErrors(['cart_data' => 'Keranjang kosong.']);
+            }
+
+            DB::beginTransaction();
+            
             $total = 0;
             // validate stock and compute total
             foreach($items as $it){
@@ -90,17 +94,26 @@ class SellingController extends Controller
             DB::commit();
 
             // If request expects JSON (AJAX), return sale details
-            if ($request->wantsJson()) {
+            if ($request->wantsJson() || $request->header('Accept') === 'application/json') {
                 return response()->json([
                     'sale_id' => $sale->id,
                     'sale_number' => $sale->sale_number,
-                ]);
+                ], 200);
             }
 
-            // Sale created — keep status as pending and redirect to placeholder (#)
-            return redirect()->to('#')->with('success', 'Penjualan disimpan dengan nomor ' . $sale->sale_number);
+            // Sale created — redirect to show page for payment selection
+            return redirect()->route('selling.show', $sale->id)->with('success', 'Penjualan disimpan dengan nomor ' . $sale->sale_number);
+            
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            if ($request->wantsJson() || $request->header('Accept') === 'application/json') {
+                return response()->json(['error' => $e->errors()], 422);
+            }
+            return back()->withErrors($e->errors());
         } catch (\Exception $e) {
             DB::rollBack();
+            if ($request->wantsJson() || $request->header('Accept') === 'application/json') {
+                return response()->json(['error' => $e->getMessage()], 500);
+            }
             return back()->withErrors(['error' => $e->getMessage()]);
         }
     }
@@ -146,5 +159,33 @@ class SellingController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    /**
+     * Display sales history with filter options
+     */
+    public function history(Request $request)
+    {
+        $query = Sale::with('paymentMethod', 'detailSales.product');
+
+        // Filter by status
+        if ($request->filled('status') && $request->status !== '') {
+            $query->where('status', $request->status);
+        }
+
+        // Filter by sale ID/number
+        if ($request->filled('sale_search')) {
+            $search = $request->sale_search;
+            $query->where(function ($q) use ($search) {
+                $q->where('id', 'like', "%{$search}%")
+                  ->orWhere('sale_number', 'like', "%{$search}%");
+            });
+        }
+
+        // Pagination
+        $sales = $query->orderBy('created_at', 'desc')->paginate(10);
+        $statuses = SaleStatus::cases();
+
+        return view('dashboard.selling.history', compact('sales', 'statuses'));
     }
 }
