@@ -3,8 +3,13 @@
 @section('content')
   <div class="min-h-screen flex items-center justify-center">
     <div class="w-full max-w-md bg-white p-8 rounded-xl shadow">
-            <img src="/images/logo.png" class="h-35 m-auto" alt="">
-            {{-- <h1 class="text-2xl font-bold text-center mb-6 mt-2">Login</h1> --}}
+            <h1 class="text-2xl font-bold text-center mb-6">Tambah Metode Pembayaran</h1>
+
+            @if (session('success'))
+                <div class="mb-4 text-center text-sm text-teal-600">
+                    {{ session('success') }}
+                </div>
+            @endif
 
             @if ($errors->any())
                 <div class="mb-4 text-center text-sm text-red-600">
@@ -12,36 +17,33 @@
                 </div>
             @endif
 
-            <form action="{{ route('login.post') }}" method="POST">
+            <form action="{{ route('payment-methods.store') }}" method="POST">
                 @csrf
 
                 <div>
-                    <label class="block text-sm font-medium mb-1">Email</label>
+                    <label class="block text-sm font-medium mb-1">Name</label>
                     <input
-                        type="email"
-                        name="email"
+                        type="text"
+                        name="name"
+                        value="{{ old('name') }}"
                         class="w-full p-2 rounded border-2 border-gray-300 focus:border-teal-500 focus:ring-teal-500"
                         required
                     >
-                    @error('email')
-                    {{-- jika ada errors dengan object `email` maka masuk ke kondisi --}}
+                    @error('name')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                        {{-- jika ingin print error maka gunakan $message yang akan otomatis mengambil pesan error object `email` --}}
                     @enderror
                 </div>
-                <div class="mt-2">
-                    <label class="block text-sm font-medium mb-1">Password</label>
-                    <input
-                        type="password"
-                        name="password"
+                <br>
+                <div>
+                    <label class="block text-sm font-medium mb-1">Description</label>
+                    <textarea
+                    style="resize:none"
+                        name="description"                       
                         class="w-full p-2 rounded border-2 border-gray-300 focus:border-teal-500 focus:ring-teal-500"
                         required
-                    >
-
-                    @error('password')
-                    {{-- jika ada errors dengan object `password` maka masuk ke kondisi --}}
+                    >{{old('description')}}</textarea>
+                    @error('desc')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                        {{-- jika ingin print error maka gunakan $message yang akan otomatis mengambil pesan error object `password` --}}
                     @enderror
                 </div>
 
@@ -49,7 +51,7 @@
                     type="submit"
                     class="w-full mt-3 bg-teal-600 hover:bg-teal-700 text-white py-2 rounded-lg font-semibold"
                 >
-                    Masuk
+                    Simpan
                 </button>
             </form>
         </div>

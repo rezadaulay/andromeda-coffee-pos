@@ -15,15 +15,15 @@ class ProductCategoryController extends Controller
      */
     public function index()
     {
-        $categories = ProductCategory::all();
-        return view("dashboard.product-category.index", compact("categories"));
+        $categories = ProductCategory::paginate();
+        return view("dashboard.product-categories.index", compact("categories"));
     }
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        return view('dashboard.product-category.create');
+        return view('dashboard.product-categories.create');
     }
 
     /**
@@ -38,7 +38,7 @@ class ProductCategoryController extends Controller
         ProductCategory::create([
             'name' => $request->name,
         ]);
-        return back()->with('success', 'Kategori berhasil ditambahkan');
+        return redirect()->route('product-categories.index')->with('success', 'Kategori berhasil ditambahkan');
     }
 
     /**
@@ -47,7 +47,7 @@ class ProductCategoryController extends Controller
     public function show(string $id) {
         $category = ProductCategory::with('products')->findOrFail($id);
 
-        return view("dashboard.product-category.detail", compact('category'));
+        return view("dashboard.product-categories.show", compact('category'));
     }
 
     /**
@@ -55,7 +55,8 @@ class ProductCategoryController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $category = ProductCategory::findOrFail($id);
+        return view('dashboard.product-categories.edit', compact('category'));
     }
 
     /**
@@ -63,7 +64,16 @@ class ProductCategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+
+        $category = ProductCategory::findOrFail($id);
+        $category->update([
+            'name' => $request->name,
+        ]);
+
+        return redirect()->route('product-categories.index')->with('success', 'Kategori berhasil diperbarui');
     }
 
     /**

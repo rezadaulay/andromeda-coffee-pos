@@ -11,6 +11,7 @@ class Product extends Model
     protected $fillable = [
         'product_category_id',
         'name',
+        'quantity',
         'price',
     ];
 
@@ -22,5 +23,14 @@ class Product extends Model
     public function detailSales(): HasMany
     {
         return $this->hasMany(DetailSale::class);
+    }
+
+    protected function casts(): array
+    {
+        return [
+            'quantity' => 'integer',
+            'product_category_id' => 'integer',
+            'price' => 'decimal:2',
+        ];
     }
 }

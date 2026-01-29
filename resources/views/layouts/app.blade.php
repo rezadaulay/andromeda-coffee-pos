@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Andromeda Coffee</title>
+    <style>
+        body::-webkit-scrollbar{
+            display: none;
+        }
+    </style>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 <body class="min-h-screen bg-gray-100">
@@ -16,15 +21,17 @@
 
                 <!-- Logo -->
                 <div class="flex items-center">
-                    <span class="text-xl font-bold text-teal-600">Andromeda</span>
+                    <img src="/images/logo-nav.png" class="h-10 m-auto" alt="">
+                    {{-- <span class="text-xl font-bold text-teal-600">Andromeda</span> --}}
                 </div>
 
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex space-x-6">
-                    <a href="#" class="text-gray-700 hover:text-indigo-600 font-medium">Penjualan</a>
-                    <a href="#" class="text-gray-700 hover:text-indigo-600 font-medium">Produk</a>
                     <a href="{{ route('product-categories.index') }}" class="text-gray-700 hover:text-indigo-600 font-medium">Kategori</a>
+                    <a href="{{ route('products.index') }}" class="text-gray-700 hover:text-indigo-600 font-medium">Produk</a>
                     <a href="#" class="text-gray-700 hover:text-indigo-600 font-medium">User</a>
+                    <a href="{{ route('payment-methods.index') }}" class="text-gray-700 hover:text-indigo-600 font-medium">Metode Pembayaran</a>
+                    <a href="{{ route('selling.index') }}" class="text-gray-700 hover:text-indigo-600 font-medium">Penjualan</a>
                     <a href="{{ route('dashboard.logout') }}" class="text-gray-700 hover:text-indigo-600 font-medium">Logout</a>
                 </div>
 
@@ -36,5 +43,7 @@
     <main class="pt-20 px-5">
         @yield('content')
     </main>
+    {{-- page scripts --}}
+    @yield('scripts')
 </body>
 </html>

@@ -25,7 +25,7 @@ class DefaultUserSeeder extends Seeder
         User::create([
             'name' => 'Cashier',
             'email' => 'cashier@gmail.com',
-            'password' => Hash::make('12346'),
+            'password' => Hash::make('123456'),
             'role' => UserRole::CASHIER
         ]);
     }
