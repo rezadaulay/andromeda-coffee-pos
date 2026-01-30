@@ -35,7 +35,7 @@
                 </div>
                 <br>
                 <div>
-                    <label class="block text-sm font-medium mb-1">Price</label>
+                    <label class="block text-sm font-medium mb-1">Description</label>
                     <textarea
                     style="resize:none"
                         name="description"                       
