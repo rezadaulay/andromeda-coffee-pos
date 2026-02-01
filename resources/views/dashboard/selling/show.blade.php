@@ -8,14 +8,21 @@
         <div class="mb-4">
             <div class="text-sm text-gray-500">Total</div>
             <div class="text-3xl font-black text-green-600">Rp {{ number_format($sale->total,0,',','.') }}</div>
+            <div class="text-sm text-gray-500 mt-1">Total Item: {{ $sale->detailSales->sum('quantity') }}</div>
         </div>
 
         <div class="mb-6">
             <h3 class="text-lg font-semibold mb-2">Rincian Item</h3>
             <div class="space-y-2">
                 @foreach($sale->detailSales as $d)
+                    @php
+                        $unitPrice = $d->quantity ? ($d->subtotal / $d->quantity) : 0;
+                    @endphp
                     <div class="flex justify-between">
-                        <div>{{ $d->product->name }} × {{ $d->quantity }}</div>
+                        <div>
+                            <div>{{ $d->product->name }} × {{ $d->quantity }}</div>
+                            <div class="text-xs text-gray-500">Harga satuan: Rp {{ number_format($unitPrice,0,',','.') }}</div>
+                        </div>
                         <div class="font-semibold">Rp {{ number_format($d->subtotal,0,',','.') }}</div>
                     </div>
                 @endforeach
