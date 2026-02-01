@@ -7,6 +7,7 @@ use App\Http\Controllers\Dashboard\ProductCategoryController;
 use App\Http\Controllers\Dashboard\ProductController;
 use App\Http\Controllers\Dashboard\PaymentMethodController;
 use App\Http\Controllers\Dashboard\ManagementStockController;
+use App\Http\Controllers\Dashboard\SellingController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -30,6 +31,11 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
 
     // Route::get('/users', IndexController::class)->name('dashboard.index');
     // Route::get('/sales', IndexController::class)->name('dashboard.index');
+
+    // Selling (kasir)
+    Route::resource('selling', SellingController::class);
+    Route::get('/selling-history', [SellingController::class, 'history'])->name('selling.history');
+    Route::get('selling/{sale}/detail', [SellingController::class, 'detail'])->name('selling.detail');
 
     // Payment Method
 }); // https://laravel.com/docs/12.x/middleware
